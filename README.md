@@ -9,8 +9,7 @@ Itemsatış'daki ilanınız satıldığında, detaylı bir log ile birlikte webh
 - Add Cookie-Editor - [Download](https://chromewebstore.google.com/detail/hlkenndednhfkekhgcdicdfddnkalmdm)
 
 ## Setup
-- Add cookie -
-- Add webhookUrl -
+- Add cookie and webhook url - https://streamable.com/gyeeg3
 - Open Install.bat
 - Open Start.bat
 
