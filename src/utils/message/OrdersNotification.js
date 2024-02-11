@@ -27,7 +27,7 @@ module.exports = async function sendMessage(order) {
                 }
             ],
             username: "Sipariş Bildirim Sistemi",
-            avatar_url: "https://scontent.fsaw2-1.fna.fbcdn.net/v/t39.30808-6/359042483_106181399211154_6791628675255973535_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=qW1p3H-sJZEAX_mmM4S&_nc_ht=scontent.fsaw2-1.fna&cb_e2o_trans=q&oh=00_AfB5lqpcGQc7TZSWHSe9dIZtOjXODF0dVoyyjysto53JSw&oe=65A91EB6"
+            avatar_url: "https://cdn.discordapp.com/attachments/1146823843667787866/1206278286544736256/unnamed.png"
         };
 
         formData.append('payload_json', JSON.stringify(embedData));
