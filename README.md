@@ -17,6 +17,6 @@ Itemsatış'daki ilanınız satıldığında, detaylı bir log ile birlikte webh
 
 ![AdminWebhook](https://github.com/Endylus/itemsatis-order-notification/assets/122468378/a2f7c487-2f57-424f-87f7-c577a4faf63d)
 
-## Normal Webhook Çıktısı
+## Public Webhook Çıktısı
 
 ![NormalWebhook](https://github.com/Endylus/itemsatis-order-notification/assets/122468378/c6c422d0-1f67-4c27-af5d-1f5aaff9c2f8)
