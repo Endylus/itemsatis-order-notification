@@ -12,7 +12,7 @@ module.exports = () => {
 
       let postUrl;
       if (details.advert && details.advert.imageUrl) {
-        postUrl = `${config.web.url}${config.web.port}/image/` + details.advert.imageUrl.replace("https://cdn.itemsatis.com/uploads/post_images/", "");
+        postUrl = `${config.web.url}:${config.web.port}/image/` + details.advert.imageUrl.replace("https://cdn.itemsatis.com/uploads/post_images/", "");
       } else {
         postUrl = 'https://i.ibb.co/5cNHqRP/itemsatis-logo.png';
       }
