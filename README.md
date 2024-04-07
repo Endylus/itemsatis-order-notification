@@ -4,7 +4,7 @@ Bu proje, ItemSatış da satılan ilanlarınızı belirli bir kanala webhook ara
 
 ## Yapılandırma
 
-`config.json` dosyasını düzenleyerek programı yapılandırın. Örnek bir yapılandırma aşağıdaki gibidir:
+1. `config.json` dosyasını düzenleyerek programı yapılandırın. Örnek bir yapılandırma aşağıdaki gibidir:
 
 ```json
 {
@@ -25,6 +25,16 @@ Bu proje, ItemSatış da satılan ilanlarınızı belirli bir kanala webhook ara
 - `webhook.purchase`: Satın Alma Webhook URL'si.
 - `webhook.starting`: Başlangıç Webhook URL'si.
 - `webhook.error`: Hata Webhook URL'si.
+
+2. [Itemsatis Webhook Ayarları](https://www.itemsatis.com/webhook-ayarlari.html) adresine gidin.
+
+3. Webhook URL seçeneğine `http://ip:port/callback` şeklinde URL'yi girin. Burada `ip` ve `port` kısımlarını kendi yapılandırmanıza uygun olarak değiştirmeniz gerekmektedir.
+
+4. ayarlarınızı kaydedin.
+
+Örnek:
+
+![image](https://github.com/Endylus/itemsatis-order-notification/assets/122468378/07077d7a-5d7f-45e4-93b9-5cd4f71f6d27)
 
 ## Port Açma
 
