@@ -1,0 +1,11 @@
+{
+    "web": {
+        "url": "http://93.177.102.201",
+        "port": 443
+    },
+    "webhook": {
+        "purchase": "https://discord.com/api/webhooks/id/token",
+        "starting": "https://discord.com/api/webhooks/id/token",
+        "error": "https://discord.com/api/webhooks/id/token"
+    }
+}

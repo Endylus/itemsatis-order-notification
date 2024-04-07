@@ -1,56 +1,44 @@
-const fetch = require("node-fetch");
-const { itemsatis } = require("../config");
-const AdminSendMessage = require("../src/utils/message/AdminOrdersNotification");
-const sendMessage = require("../src/utils/message/OrdersNotification");
-let globalSales = [];
+const express = require("express");
+const { urlencoded, json } = require("body-parser");
+const webhhookSender = require("./utils/webhookSender");
+const cors = require("cors");
+const app = express();
+const requestIp = require('request-ip');
+const morgan = require('morgan');
+const { webhook, web } = require('../config');
 
-async function checkSales(userId) {
-    try {
-        const newData = await getOrderData();
-        if (!newData || newData == null) return;
-        let newSales = newData.filter(x => !globalSales.some(y => y.Id === x.Id));
-        if (newSales && newSales.length > 0) {
-            newSales.forEach(async order => {
-                console.log(`Yeni bir sipariş geldi: ${order.Title} - ${new Date().toLocaleString()}`);
-                await sendMessage(order)
-                await AdminSendMessage(order, userId)
-            });
-            globalSales = newData;
-        }
-    } catch (error) {
-        console.error(error);
-    }
+app.use(cors());
+app.use(json());
+app.use(requestIp.mw());
+app.use(morgan('combined'));
+app.use(urlencoded({ limit: "50mb", extended: false }));
+
+app.use("/callback", require("./router/callback")());
+app.use("/image", require("./router/image")());
+app.use("/", require("./router/home")());
+
+process.on('SIGINT', async (code) => {
+  await webhhookSender(JSON.stringify({
+    content: `API is shutting down. Time: <t:${Math.floor(Date.now() / 1000)}:F> - <t:${Math.floor(Date.now() / 1000)}:R>`,
+  }), webhook.error);
+  process.exit(0);
+});
+
+process.on('uncaughtException', (err) => {
+  webhhookSender(JSON.stringify({
+    content: `An error occurred within the system. Time: <t:${Math.floor(Date.now() / 1000)}:F> - <t:${Math.floor(Date.now() / 1000)}:R>\nError: \`\`\`${err.message}\`\`\``,
+  }), webhook.error);
+});
+
+function start() {
+  console.clear();
+  process.title = "Itemsatis Order Notification System";
+  const listener = app.listen(web.port, async () => {
+    webhhookSender(JSON.stringify({
+      content: `API initialized. Time: <t:${Math.floor(Date.now() / 1000)}:F> - <t:${Math.floor(Date.now() / 1000)}:R>`,
+    }), webhook.starting);
+    console.log(`API is running on port ${listener.address().port}\n${web.url}:${listener.address().port}`);
+  });
 }
 
-(async () => {
-    let data = await getUserId()
-    if (!data) {
-        console.log("Cookie hatalı veya süresi dolmuş olabilir.");
-        process.exit(1);
-    }
-    console.log(`Siparişler kontrol ediliyor - ${new Date().toLocaleString()}`);
-    globalSales = await getOrderData();
-    setInterval(() => {
-        checkSales(data)
-    }, 5000);
-})()
-
-async function getOrderData() {
-    let datas = await fetch("https://www.itemsatis.com/api/getMySoldOrders", {
-        headers: { "content-type": "application/x-www-form-urlencoded; charset=UTF-8", cookie: 'PHPSESSID=' + itemsatis.cookie },
-        body: "Page=1&Search=&StartDate=&FinishDate=",
-        method: "POST"
-    }).catch((error) => { return null; })
-    let data = await datas?.json()
-    if (!data.success || !data) return null;
-    return data.Datas.filter(x => x.StateText === "Alıcının teslimatı onaylaması bekleniyor");
-}
-
-async function getUserId() {
-    let datas = await fetch("https://www.itemsatis.com/api/getBillingInformation", {
-        headers: { accept: "application/json, text/plain, */*", "content-type": "application/x-www-form-urlencoded", cookie: 'PHPSESSID=' + itemsatis.cookie },
-        method: "POST"
-    }).then(res => res.json())
-    if (!datas.success || !datas) return null;
-    return datas.data.UserId
-}
+module.exports = start;

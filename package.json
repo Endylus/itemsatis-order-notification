@@ -1,18 +1,23 @@
 {
   "name": "itemsatis-order-notification",
   "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.js",
+  "description": "ItemSatış Order Notification Project",
+  "main": "./src/starting.js",
   "scripts": {
+    "start": "node ./src/starting.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "form-data": "^4.0.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.7",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request-ip": "^3.3.0"
   }
 }
