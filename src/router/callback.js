@@ -21,7 +21,7 @@ module.exports = () => {
         embeds: [
           {
             title: "Yeni Bir Sipariş Var!",
-            description: `\`\`\`${order.Title}\`\`\``,
+            description: `\`\`\`${details.advert.title}\`\`\``,
             thumbnail: { url: postUrl }
           }
         ],
