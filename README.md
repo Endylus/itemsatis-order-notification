@@ -86,4 +86,4 @@ Bu proje ve içeriğinin kullanımından kaynaklanabilecek herhangi bir sorundan
 
 ## Destek
 
-Eğer herhangi bir sorunuz varsa çekinmeden Discord sunucuma katılabilirsiniz: [https://discord.gg/dctoken](https://discord.gg/dctoken)
+Eğer herhangi bir sorunuz varsa çekinmeden Discord sunucuma katılabilirsiniz: [https://discord.gg/tokenverse](https://discord.gg/tokenverse)
